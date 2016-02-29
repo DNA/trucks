@@ -20,4 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  defaut_title: 'Tracking System'
+
+  form:
+    show: 'Show'
+    edit: 'Edit'
+    destroy: 'Delete'
+    destroy_confirmation: 'Are you sure?'
+
+  driver:
+    name: 'Name'
+    cpf: 'CPF'
+    truck_type: 'Truck type'
+    latitude: 'Latitude'
+    longitude: 'Longitude'
+    new: 'New Driver'

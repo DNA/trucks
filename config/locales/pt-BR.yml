@@ -1,0 +1,30 @@
+pt-BR:
+
+  layout:
+    toogle_navigation: 'Evibir navegação'
+    site_name: 'Sistema de rastreio'
+
+  controller:
+    driver: 'Motoristas'
+
+  form:
+    show: 'Exibir'
+    edit: 'Editar'
+    destroy: 'Excluir'
+    destroy_confirmation: 'Você tem certeza?'
+
+  drivers:
+    name: 'Nome'
+    cpf: 'CPF'
+    truck_type: 'Tipo de caminhão'
+    latitude: 'Latitude'
+    longitude: 'Longitude'
+    new: 'Novo motorista'
+    listing: 'Listagem de motoristas'
+    empty: 'Nenhum motorista encontrado. Clique em "Novo motorista" para começar a usar o sistema.'
+    title:
+      index: 'Motoristas'
+    subtitle:
+      index: 'Listagem geral'
+
+
