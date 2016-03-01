@@ -5,7 +5,7 @@ pt-BR:
     site_name: 'Sistema de rastreio'
 
   controller:
-    driver: 'Motoristas'
+    drivers: 'Motoristas'
 
   form:
     show: 'Exibir'
