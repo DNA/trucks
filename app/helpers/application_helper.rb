@@ -15,9 +15,13 @@ module ApplicationHelper
   end
 
   def navbar_link(path, name, controller)
+    begin
     if current_page? controller: controller, action: action_name
       li_options = { class: 'active' }
       sr_tag = content_tag(:span, '(current)', class: 'sr-only')
+    end
+    rescue ActionController::UrlGenerationError
+      # current_page? raise an error, don't know why, but we can keep going
     end
 
     content_tag(:li, link_to("#{name} #{sr_tag}".html_safe, path), li_options)

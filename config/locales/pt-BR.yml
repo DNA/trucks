@@ -37,6 +37,11 @@ pt-BR:
     destroy:
       notice: 'Motorista removido com sucesso'
 
+  tracking:
+    index:
+      title: 'Rastreio'
+      subtext: 'de motoristas'
+
   activerecord:
     models:
       driver:
