@@ -1,37 +1,116 @@
 <%= form_for(@driver) do |f| %>
-  <% if @driver.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@driver.errors.count, "error") %> prohibited this driver from being saved:</h2>
 
-      <ul>
-      <% @driver.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <% if @driver.errors.any? %>
+
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          <%= t('form.error', count: @driver.errors.count, model: @driver.model_name.human) %>
+        </div>
+        <div class="panel-body">
+          <ul>
+          <% @driver.errors.full_messages.each do |message| %>
+            <li class="text-danger"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <div class="form-group">
+      <%= f.label :cpf %><br>
+      <%= f.text_field :cpf, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :truck_type %><br>
+      <%= f.text_field :truck_type, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :latitude %><br>
+      <%= f.text_field :latitude, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :longitude %><br>
+      <%= f.text_field :longitude, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :cpf %><br>
-    <%= f.text_field :cpf %>
+
+  <div class="col-xs-12 col-md-8">
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var driver_latitude = document.getElementById('driver_latitude')
+        var driver_longitude = document.getElementById('driver_longitude')
+        var geocoder = new google.maps.Geocoder;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          styles: [{
+              featureType: 'poi',
+              stylers: [{ visibility: 'off' }]
+            }, {
+              featureType: 'transit.station',
+              stylers: [{ visibility: 'off' }]
+            }],
+        });
+        var driverMarker = new google.maps.Marker({
+          map: map,
+          draggable: true
+        });
+
+        map.addListener('click', function(event) {
+          driverMarker.setPosition(event.latLng)
+          driver_latitude.value = event.latLng.lat()
+          driver_longitude.value = event.latLng.lng()
+        });
+
+        driverMarker.addListener('dragend', function(event) {
+          driver_latitude.value = event.latLng.lat()
+          driver_longitude.value = event.latLng.lng()
+        });
+
+        if (driver_latitude.value != '' && driver_longitude.value != '') {
+          driverLatLang = {
+            lat: parseFloat(driver_latitude.value),
+            lng:parseFloat(driver_longitude.value)
+          }
+
+          driverMarker.setPosition(driverLatLang)
+          map.setCenter(driverLatLang);
+          map.setZoom(15);
+        } else {
+          geocoder.geocode({'address': 'Brazil'}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+            }
+          });
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&region=BR&language=pt-BR&callback=initMap"
+    async defer></script>
   </div>
-  <div class="field">
-    <%= f.label :truck_type %><br>
-    <%= f.text_field :truck_type %>
-  </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+
+<br>
+
+<div class="btn-group" role="group">
+  <%= f.submit nil, class: 'btn btn-primary' %>
+  <%= link_to t('form.back'), drivers_path, class: 'btn btn-default' %>
+</div>
+
 <% end %>
