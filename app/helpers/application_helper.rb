@@ -1,8 +1,8 @@
 module ApplicationHelper
 
   def page_title(separator: '|', use_html: true)
-    title = t("#{controller_name}.title.#{action_name}", default: '')
-    subtitle = t("#{controller_name}.subtitle.#{action_name}", default: '')
+    title = t("#{controller_name}.#{action_name}.title", default: '')
+    subtitle = t("#{controller_name}.#{action_name}.subtext", default: '')
 
     return t('layout.site_name') if title.empty?
     return title if subtitle.empty?

@@ -1,30 +1,51 @@
 pt-BR:
 
   layout:
-    toogle_navigation: 'Evibir navegação'
+    toogle_navigation: 'Exibir navegação'
     site_name: 'Sistema de rastreio'
 
-  controller:
-    drivers: 'Motoristas'
-
   form:
+    new: 'Novo'
+    back: 'Voltar'
     show: 'Exibir'
     edit: 'Editar'
+    error:
+      one: '%{count} erro impediu este %{model} de ser salvo'
+      other: '%{count} erros impediram este %{model} de ser salvo'
+    actions: 'Ações'
     destroy: 'Excluir'
     destroy_confirmation: 'Você tem certeza?'
 
   drivers:
-    name: 'Nome'
-    cpf: 'CPF'
-    truck_type: 'Tipo de caminhão'
-    latitude: 'Latitude'
-    longitude: 'Longitude'
-    new: 'Novo motorista'
-    listing: 'Listagem de motoristas'
-    empty: 'Nenhum motorista encontrado. Clique em "Novo motorista" para começar a usar o sistema.'
-    title:
-      index: 'Motoristas'
-    subtitle:
-      index: 'Listagem geral'
+    index:
+      title: 'Motoristas'
+      subtext: 'Listagem geral'
+    new:
+      title: 'Motorista'
+      subtext: 'Cadastrar'
+    create:
+      title: 'Motorista'
+      subtext: 'Cadastrar'
+      notice: 'Motorista criado com sucesso'
+    edit:
+      title: 'Motorista'
+      subtext: 'Editar dados'
+    update:
+      title: 'Motorista'
+      subtext: 'Editar dados'
+      notice: 'Motorista editado com sucesso'
+    destroy:
+      notice: 'Motorista removido com sucesso'
 
-
+  activerecord:
+    models:
+      driver:
+        one: 'motorista'
+        other: 'motoristas'
+    attributes:
+      driver:
+        name: 'Nome'
+        cpf: 'CPF'
+        truck_type: 'Tipo de caminhão'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
