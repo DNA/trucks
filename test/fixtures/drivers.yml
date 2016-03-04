@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  cpf: MyString
-  truck_type: MyString
-  latitude: MyString
-  longitude: MyString
+  name: 'Fulano'
+  cpf: '123.456.789-01'
+  truck_type: 'Caminhão pipa'
+  latitude: -12.1234
+  longitude: -23.4567
 
 two:
-  name: MyString
-  cpf: MyString
-  truck_type: MyString
-  latitude: MyString
-  longitude: MyString
+  name: 'Cicrano'
+  cpf: '098.765.432-12'
+  truck_type: 'Bi-articulado'
+  latitude: -34.5678
+  longitude: -45.6789
