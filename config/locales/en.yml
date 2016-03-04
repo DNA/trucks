@@ -1,37 +1,56 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  defaut_title: 'Tracking System'
+
+  layout:
+    toogle_navigation: 'Toogle navigation'
+    site_name: 'Tracking system'
 
   form:
+    new: 'New'
+    back: 'Back'
     show: 'Show'
     edit: 'Edit'
+    error:
+      one: '%{count} error prohibited %{model} from saving'
+      other: '%{count} errors prohibited %{model} from saving'
+    actions: 'Actions'
     destroy: 'Delete'
     destroy_confirmation: 'Are you sure?'
 
-  driver:
-    name: 'Name'
-    cpf: 'CPF'
-    truck_type: 'Truck type'
-    latitude: 'Latitude'
-    longitude: 'Longitude'
-    new: 'New Driver'
+  drivers:
+    index:
+      title: 'Drivers'
+      subtext: 'Listing'
+    new:
+      title: 'Driver'
+      subtext: 'Create new driver'
+    create:
+      title: 'Driver'
+      subtext: 'Create new'
+      notice: 'Driver created succesfuly!'
+    edit:
+      title: 'Driver'
+      subtext: 'Edit driver data'
+    update:
+      title: 'Driver'
+      subtext: 'Edit driver data'
+      notice: 'Driver edited succesfuly!'
+    destroy:
+      notice: 'Driver deleted succesfuly!'
+
+  tracking:
+    index:
+      title: 'Tracking'
+      subtext: "Driver's location"
+
+  activerecord:
+    models:
+      driver:
+        one: 'driver'
+        other: 'drivers'
+    attributes:
+      driver:
+        name: 'Name'
+        cpf: 'Document'
+        truck_type: 'Truck type'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
