@@ -39,8 +39,8 @@ pt-BR:
 
   tracking:
     index:
-      title: 'Rastreio'
-      subtext: 'de motoristas'
+      title: 'Localização'
+      subtext: 'dos motoristas'
 
   activerecord:
     models:

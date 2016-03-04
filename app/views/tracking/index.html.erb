@@ -1,1 +1,90 @@
-index.html.erb
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="list-group" id="driver-list">
+      <% @drivers.each_with_index do |driver, index| %>
+      <a href="#" class="list-group-item"
+         data-position="<%= index %>"
+         data-id="<%= driver.id %>"
+         data-name="<%= driver.name %>"
+         data-cpf="<%= driver.cpf %>"
+         data-truckType="<%= driver.truck_type %>"
+         data-lat="<%= driver.latitude %>"
+         data-lng="<%= driver.longitude %>"
+         >
+        <h5 class="list-group-item-heading"><%= driver.name %></h5>
+        <p class="list-group-item-text"><%= driver.cpf %></p>
+        <p class="list-group-item-text"><%= driver.truck_type %></p>
+      </a>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-8">
+
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var bounds = new google.maps.LatLngBounds();
+        var drivers = document.querySelectorAll('#driver-list a')
+        var infoWindows = []
+        var activeInfoWindow = null
+        var activeListItem = null
+        var markers = []
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          styles: [{
+              featureType: 'poi',
+              stylers: [{ visibility: 'off' }]
+            }, {
+              featureType: 'transit.station',
+              stylers: [{ visibility: 'off' }]
+            }]
+        });
+
+        for (x = 0, len = drivers.length; x < len; x++) {
+
+          infoWindows[x] = new google.maps.InfoWindow({
+            content: '<strong>' + drivers[x].dataset.name + '</strong></br>' +
+                     drivers[x].dataset.cpf + '<br>' +
+                     drivers[x].dataset.trucktype
+          })
+
+          markers[x] = new google.maps.Marker({
+            position: {
+              lat: parseFloat(drivers[x].dataset.lat),
+              lng: parseFloat(drivers[x].dataset.lng)
+            },
+            map: map,
+            id: x
+          })
+
+          google.maps.event.addListener(markers[x], 'click', function() {
+            if (activeInfoWindow) {
+              activeInfoWindow.close()
+            }
+            activeInfoWindow = infoWindows[this.id]
+            activeInfoWindow.open(map, this)
+
+            if (activeListItem) {
+              activeListItem.classList.remove('active');
+            }
+
+            activeListItem = drivers[this.id]
+            activeListItem.classList.add('active')
+          });
+
+          drivers[x].addEventListener('click', function(){
+            new google.maps.event.trigger(markers[this.dataset.position], 'click');
+          })
+
+          bounds.extend(markers[x].getPosition())
+        }
+
+        map.fitBounds(bounds);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&region=BR&language=pt-BR&callback=initMap"
+    async defer></script>
+
+  </div>
+</div>
